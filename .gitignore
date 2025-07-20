@@ -1,4 +1,7 @@
 **/__pycache__/
+**/kafka/
+**/tmp/
+**/.ipynb_checkpoints/
 **/.mypy_cache/
 **/.pytest_cache/
 *.py[cod]
