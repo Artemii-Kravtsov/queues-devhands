@@ -24,7 +24,7 @@ class EnrichPurchaseFunction(CoProcessFunction):
 
     def open(self, context):
         # Создаю стейт, в который буду сохранять покупки и события без пары.
-        # Например, покупку, которая пришла раньше события покупки
+        # Например, purchase, которая пришла раньше event-a
         self.purchase_state = context.get_list_state(
             ListStateDescriptor("purchases", Types.ROW_NAMED(
                 ['amount', 'user_id', 'page_id', 'timestamp'],
@@ -74,7 +74,7 @@ class EnrichPurchaseFunction(CoProcessFunction):
             self.purchase_state.add(purchase)
 
     def on_timer(self, timestamp, ctx):
-        # Очистка старых покупок (опционально, для управления размером состояния)
+        # для управления размером состояния
         current_watermark = ctx.get_current_watermark()
         updated_purchases = [
             p for p in self.purchase_state
