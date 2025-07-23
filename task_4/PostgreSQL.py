@@ -30,8 +30,9 @@ class PostgreSQL:
     @asynccontextmanager
     async def transaction(self):
         async with self.pool.acquire() as connection:
+            # если ошибок не было, при закрытии контекстного менеджера
+            # asyncpg сделает commit. если ошибка, то rollback
             async with connection.transaction():
-                await connection.execute("SET lock_timeout = '3s'")
                 yield connection
 
     async def execute(
