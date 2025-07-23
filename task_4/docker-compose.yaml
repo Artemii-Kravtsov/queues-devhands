@@ -1,0 +1,48 @@
+services:
+  db_start:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db_start
+    volumes:
+      - db_start_vol:/var/lib/postgresql/data
+      - ./init_db_start.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "8000:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db_end:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db_end
+    volumes:
+      - db_end_vol:/var/lib/postgresql/data
+      - ./init_db_end.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "8001:5432"      
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+
+volumes:
+  db_start_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/timosha/wb/queues-devhands/task_4/db_start_volume
+  db_end_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/timosha/wb/queues-devhands/task_4/db_end_volume

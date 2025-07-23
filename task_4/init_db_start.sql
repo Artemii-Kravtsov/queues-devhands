@@ -1,0 +1,22 @@
+CREATE SCHEMA IF NOT EXISTS main;
+CREATE SCHEMA IF NOT EXISTS outbox;
+
+CREATE TABLE IF NOT EXISTS main.transactions (
+    id BIGINT PRIMARY KEY,
+    account_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS outbox.transactions (
+    id BIGINT,
+    account_id INT,
+    amount DECIMAL(10, 2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS main.balance (
+    account_id INT PRIMARY KEY,
+    current_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

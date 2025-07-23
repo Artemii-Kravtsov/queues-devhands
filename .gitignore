@@ -4,6 +4,8 @@
 **/.ipynb_checkpoints/
 **/.mypy_cache/
 **/.pytest_cache/
+**/db_start_volume/
+**/db_end_volume/
 *.py[cod]
 .idea/
 .vscode/
