@@ -1,0 +1,25 @@
+services:
+  inst-1:
+    image: nats
+    command: -c /etc/my-server.conf --name inst-1 -p 4222 -m 8222
+    volumes:
+      - /home/timosha/wb/queues-devhands/task_5/nats.conf:/etc/my-server.conf
+    ports:
+      - 4222:4222
+      - 8222:8222
+
+  inst-2:
+    image: nats
+    command: -c /etc/my-server.conf --name inst-2 -p 4222 -m 8222
+    volumes:
+      - /home/timosha/wb/queues-devhands/task_5/nats.conf:/etc/my-server.conf
+    ports:
+      - 4223:4222
+      
+  inst-3:
+    image: nats
+    command: -c /etc/my-server.conf --name inst-3 -p 4222 -m 8222
+    volumes:
+      - /home/timosha/wb/queues-devhands/task_5/nats.conf:/etc/my-server.conf
+    ports:
+      - 4224:4222
